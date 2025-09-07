@@ -184,12 +184,14 @@
     </div>
 
     <!-- Programming Languages Delayed Dropdown -->
-    <div class="section">
+    <div class="dropdown">
         <h2>Programming Languages Dropdown</h2>
-        <button onclick="showDropdown()">Delayed Dropdown</button>
-        <select id="progSelect" style="margin-top:10px;">
-            <option value="">--Select--</option>
-        </select>
+        <button onclick="setTimeout(myFunction,3000)" class="dropbtn">Dropdown</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="http://facebook.com" disabled="">Facebook</a>
+                <a href="http://flipkart.com/">Flipkart</a>
+                <a href="http://gmail.com/">Gmail</a>
+            </div>
     </div>
 
     <!-- Useful Links -->
@@ -271,37 +273,31 @@ document.getElementById("tryItBtn").addEventListener("click", function() {
     }, 10000);
 });
 
-document.getElementById("delayedProgBtn").addEventListener("click", function() {
-    const select = document.getElementById("progSelect");
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
 
-    // Clear previous options except the placeholder
-    select.options.length = 1;
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
 
-    // Show temporary loading text
-    const loadingOption = new Option("Loading options...", "");
-    select.add(loadingOption);
-
-    // Add actual options after 3 seconds
-    setTimeout(() => {
-        select.options.length = 0; // remove loading
-        select.add(new Option("--Select--", ""));
-        
-        const options = [
-            { value: "python", text: "Python" },
-            { value: "java", text: "Java" },
-            { value: "javascript", text: "JavaScript" },
-            { value: "csharp", text: "C#" }
-        ];
-
-        options.forEach(opt => {
-            select.add(new Option(opt.text, opt.value));
-        });
-    }, 3000);
-});
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 </script>
 
 </body>
 </html>
+
 
 
 
