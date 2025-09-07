@@ -273,8 +273,8 @@ document.getElementById("tryItBtn").addEventListener("click", function() {
     }, 10000);
 });
 
-    // Delayed Dropdown: options appear one by one every 10 sec
-document.addEventListener("DOMContentLoaded", function() {
+// Delayed Dropdown: all options appear 3 seconds after clicking
+function showDropdown() {
     const select = document.getElementById("progSelect");
     const options = [
         { value: "python", text: "Python" },
@@ -283,19 +283,22 @@ document.addEventListener("DOMContentLoaded", function() {
         { value: "csharp", text: "C#" }
     ];
 
-    options.forEach((opt, index) => {
-        setTimeout(() => {
+    select.innerHTML = '<option value="">--Select--</option>'; // reset
+
+    setTimeout(() => {
+        options.forEach(opt => {
             const optionElem = document.createElement("option");
             optionElem.value = opt.value;
             optionElem.text = opt.text;
             select.add(optionElem);
-        }, 10000 * (index + 1)); // 10 sec delay per option
-    });
-});
+        });
+    }, 3000); // all options added after 3 seconds
+}
 </script>
 
 </body>
 </html>
+
 
 
 
