@@ -271,10 +271,13 @@ document.getElementById("tryItBtn").addEventListener("click", function() {
     }, 10000);
 });
 
-function showDropdown() {
+document.getElementById("delayedDropdownBtn").addEventListener("click", function() {
     const select = document.getElementById("progSelect");
-    select.innerHTML = '<option value="">Loading options...</option>'; // temporary text
 
+    // Temporary loading message
+    select.innerHTML = '<option value="">Loading options...</option>';
+
+    // After 3 seconds, populate options
     setTimeout(() => {
         const options = [
             { value: "python", text: "Python" },
@@ -283,16 +286,21 @@ function showDropdown() {
             { value: "csharp", text: "C#" }
         ];
 
-        // Reset select with default
-        let html = '<option value="">--Select--</option>';
-        options.forEach(opt => {
-            html += `<option value="${opt.value}">${opt.text}</option>`;
+        // Clear existing options
+        select.options.length = 0;
+
+        // Add default placeholder
+        select.options[0] = new Option("--Select--", "");
+
+        // Add new options one by one
+        options.forEach((opt, index) => {
+            select.options[select.options.length] = new Option(opt.text, opt.value);
         });
-        select.innerHTML = html;  // Update all options at once
     }, 3000);
-}
+});
 </script>
 
 </body>
 </html>
+
 
