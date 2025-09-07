@@ -191,11 +191,11 @@
     </div>
 
     <div class="section" style="display:flex; gap:30px; flex-wrap:wrap; align-items:flex-start;">
-            <h2>Programming Languages Dropdown</h2>
-            <button onclick="showDropdown()" class="dropbtn">Delayed Dropdown</button>
-            <select id="progSelect" style="margin-top:10px;">
-                <option value="">--Select--</option>
-            </select>
+        <h2>Programming Languages Dropdown</h2>
+        <button onclick="showDropdown()" class="dropbtn">Delayed Dropdown</button>
+        <div id="progDropdown" style="display:none; border:1px solid #ccc; margin-top:5px; padding:5px;">
+        <!-- Options will appear here -->
+        </div>
     </div>
 
     <!-- Useful Links -->
@@ -273,31 +273,29 @@ document.getElementById("tryItBtn").addEventListener("click", function() {
     }, 10000);
 });
 
-// Delayed Dropdown: all options appear 3 seconds after clicking
 function showDropdown() {
-    const select = document.getElementById("progSelect");
-    const options = [
-        { value: "python", text: "Python" },
-        { value: "java", text: "Java" },
-        { value: "javascript", text: "JavaScript" },
-        { value: "csharp", text: "C#" }
-    ];
-
-    select.innerHTML = '<option value="">--Select--</option>'; // reset
+    const dropdown = document.getElementById("progDropdown");
+    dropdown.innerHTML = ""; // reset
+    dropdown.style.display = "block";
+    dropdown.textContent = "Loading options... ⏳";
 
     setTimeout(() => {
+        const options = ["Python", "Java", "JavaScript", "C#"];
+        dropdown.innerHTML = ""; // clear loading
         options.forEach(opt => {
-            const optionElem = document.createElement("option");
-            optionElem.value = opt.value;
-            optionElem.text = opt.text;
-            select.add(optionElem);
+            const btn = document.createElement("button");
+            btn.textContent = opt;
+            btn.style.display = "block";
+            btn.style.margin = "5px 0";
+            btn.onclick = () => alert(opt + " selected!");
+            dropdown.appendChild(btn);
         });
-    }, 3000); // all options added after 3 seconds
+    }, 3000);
 }
-</script>
 
 </body>
 </html>
+
 
 
 
