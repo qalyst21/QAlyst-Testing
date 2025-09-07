@@ -190,6 +190,11 @@
             <h2>Try It Button (Auto Disable)</h2>
             <button id="tryItBtn">Try It</button>
             <p id="tryItMsg" style="color:blue; font-weight:bold;"></p>
+            <h2>Programming Languages Dropdown</h2>
+            <label for="progSelect">Select Language:</label>
+            <select id="progSelect">
+            <option value="">--Select--</option>
+        </select>
         </div>
     </div>
 
@@ -267,10 +272,31 @@ document.getElementById("tryItBtn").addEventListener("click", function() {
         
     }, 10000);
 });
+
+    // Delayed Dropdown: options appear one by one every 10 sec
+document.addEventListener("DOMContentLoaded", function() {
+    const select = document.getElementById("progSelect");
+    const options = [
+        { value: "python", text: "Python" },
+        { value: "java", text: "Java" },
+        { value: "javascript", text: "JavaScript" },
+        { value: "csharp", text: "C#" }
+    ];
+
+    options.forEach((opt, index) => {
+        setTimeout(() => {
+            const optionElem = document.createElement("option");
+            optionElem.value = opt.value;
+            optionElem.text = opt.text;
+            select.add(optionElem);
+        }, 10000 * (index + 1)); // 10 sec delay per option
+    });
+});
 </script>
 
 </body>
 </html>
+
 
 
 
