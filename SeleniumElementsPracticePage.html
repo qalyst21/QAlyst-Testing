@@ -111,7 +111,7 @@
         <button onclick="showConfirm()">Confirm Alert</button>
         <button onclick="showPrompt()">Prompt Alert</button>
         <h2>Images</h2>
-        <img src="https://drive.google.com/file/d/1YXqsaJ4hqD3sUVk23mExnk9FO5lKqRcK/view?usp=drive_link" alt="Placeholder Image">
+        <img src="https://via.placeholder.com/150" alt="Placeholder Image">
     </div>
 
     <!-- Tables -->
@@ -171,15 +171,26 @@
         <p id="dropdownTimerText" style="color:red; font-style:italic;"></p>
     </div>
 
-    <!-- Double Click & Delayed Enable -->
-    <div class="section">
-        <h2>Double Click Button</h2>
-        <button id="doubleClickBtn">Double Click Me</button>
-        <p id="doubleClickMsg" style="color:green; font-weight:bold;"></p>
-        <h2>Enable Button After Delay</h2>
-        <button id="checkThisBtn">Check This</button>
-        <button id="specialActionBtn" disabled>Special Action</button>
-        <p id="delayMsg" style="color:blue; font-style:italic;"></p>
+    <!-- Double Click, Delayed Enable & Try It Button (Side by Side) -->
+    <div class="section" style="display:flex; gap:30px; flex-wrap:wrap; align-items:flex-start;">
+        <!-- Left: Double Click & Delayed Enable -->
+        <div style="flex:1; min-width:250px;">
+            <h2>Double Click Button</h2>
+            <button id="doubleClickBtn">Double Click Me</button>
+            <p id="doubleClickMsg" style="color:green; font-weight:bold;"></p>
+
+            <h2>Enable Button After Delay</h2>
+            <button id="checkThisBtn">Check This</button>
+            <button id="specialActionBtn" disabled>Special Action</button>
+            <p id="delayMsg" style="color:blue; font-style:italic;"></p>
+        </div>
+
+        <!-- Right: Try It Button -->
+        <div style="flex:0 0 200px; min-width:200px;">
+            <h2>Try It Button (Auto Disable)</h2>
+            <button id="tryItBtn">Try It</button>
+            <p id="tryItMsg" style="color:blue; font-weight:bold;"></p>
+        </div>
     </div>
 
     <!-- Useful Links -->
@@ -197,7 +208,6 @@
 </div>
 
 <script>
-/* Your existing JS remains the same */
 document.getElementById("actionName").addEventListener("input", function(){
     document.getElementById("btnNameAction").disabled = !this.value.trim();
 });
@@ -216,16 +226,39 @@ document.getElementById("delayedDropdownBtn").addEventListener("click", function
     const dropdown = document.getElementById("delayedDropdownMenu");
     const timerText = document.getElementById("dropdownTimerText");
     dropdown.style.display = "none";
-    timerText.textContent = "Dropdown options will appear in 3 minutes... ⏳";
-    setTimeout(() => {dropdown.style.display = "block"; timerText.textContent = "Dropdown options are now available!";}, 180000);
+    timerText.textContent = "Dropdown options will appear in 1 minutes... ⏳";
+    setTimeout(() => {dropdown.style.display = "block"; timerText.textContent = "Dropdown options are now available!";}, 60000);
 });
-document.getElementById("doubleClickBtn").addEventListener("dblclick", function() {const msg=document.getElementById("doubleClickMsg");msg.textContent="Double Click Successful! 🎉";alert("You double-clicked the button!");});
-document.getElementById("checkThisBtn").addEventListener("click", function() {const btn=document.getElementById("specialActionBtn");const msg=document.getElementById("delayMsg");msg.textContent="Special Action button will be enabled in 15 seconds... ⏳";setTimeout(()=>{btn.disabled=false;msg.textContent="Special Action button is now enabled!";},15000);});
+
+// Double Click Button
+document.getElementById("doubleClickBtn").addEventListener("dblclick", function() {
+    const msg = document.getElementById("doubleClickMsg");
+    msg.textContent = "Double Click Successful! 🎉";
+    alert("You double-clicked the button!");
+});
+
+// Enable After Delay
+document.getElementById("checkThisBtn").addEventListener("click", function() {
+    const btn = document.getElementById("specialActionBtn");
+    const msg = document.getElementById("delayMsg");
+    msg.textContent = "Special Action button will be enabled in 15 seconds... ⏳";
+    setTimeout(() => {
+        btn.disabled = false;
+        msg.textContent = "Special Action button is now enabled!";
+    }, 15000);
+});
+
+// Try It Button (10 sec auto disable)
+document.getElementById("tryItBtn").addEventListener("click", function() {
+    const btn = this;
+    const msg = document.getElementById("tryItMsg");
+    msg.textContent = "Button will disable in 10 seconds...";
+    setTimeout(() => {
+        btn.disabled = true;
+        msg.textContent = "Disabled!";
+    }, 10000);
+});
 </script>
 
 </body>
 </html>
-
-
-
-
