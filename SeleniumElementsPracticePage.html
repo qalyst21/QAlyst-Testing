@@ -173,8 +173,6 @@
 
     <!-- Double Click, Delayed Enable & Try It Button (Side by Side) -->
     <div class="section" style="display:flex; gap:30px; flex-wrap:wrap; align-items:flex-start;">
-        <!-- Left: Double Click & Delayed Enable -->
-        <div style="flex:1; min-width:250px;">
             <h2>Double Click Button</h2>
             <button id="doubleClickBtn">Double Click Me</button>
             <p id="doubleClickMsg" style="color:green; font-weight:bold;"></p>
@@ -183,8 +181,8 @@
             <button id="checkThisBtn">Check This</button>
             <button id="specialActionBtn" disabled>Special Action</button>
             <p id="delayMsg" style="color:blue; font-style:italic;"></p>
-        </div>
-
+    </div>
+    <div class="section" style="display:flex; gap:30px; flex-wrap:wrap; align-items:flex-start;">
         <!-- Right: Try It Button -->
         <div style="flex:0 0 200px; min-width:200px;">
             <h2>Try It Button (Auto Disable)</h2>
@@ -262,3 +260,4 @@ document.getElementById("tryItBtn").addEventListener("click", function() {
 
 </body>
 </html>
+
