@@ -274,27 +274,29 @@ document.getElementById("tryItBtn").addEventListener("click", function() {
 });
 
 function showDropdown() {
-    const dropdown = document.getElementById("progDropdown");
-    dropdown.innerHTML = ""; // reset
-    dropdown.style.display = "block";
-    dropdown.textContent = "Loading options... ⏳";
+    const select = document.getElementById("progSelect");
+    select.innerHTML = '<option value="">Loading options...</option>'; // temporary text
 
     setTimeout(() => {
-        const options = ["Python", "Java", "JavaScript", "C#"];
-        dropdown.innerHTML = ""; // clear loading
+        const options = [
+            { value: "python", text: "Python" },
+            { value: "java", text: "Java" },
+            { value: "javascript", text: "JavaScript" },
+            { value: "csharp", text: "C#" }
+        ];
+        select.innerHTML = '<option value="">--Select--</option>'; // reset
         options.forEach(opt => {
-            const btn = document.createElement("button");
-            btn.textContent = opt;
-            btn.style.display = "block";
-            btn.style.margin = "5px 0";
-            btn.onclick = () => alert(opt + " selected!");
-            dropdown.appendChild(btn);
+            const optionElem = document.createElement("option");
+            optionElem.value = opt.value;
+            optionElem.text = opt.text;
+            select.add(optionElem);
         });
     }, 3000);
 }
 
 </body>
 </html>
+
 
 
 
