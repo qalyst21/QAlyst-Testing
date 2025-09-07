@@ -156,46 +156,40 @@
         <button onclick="openSpreadsheetTab()">Open Spreadsheet in New Tab</button>
     </div>
 
-    <!-- New Tab / Window & Delayed Dropdown -->
+    <!-- New Tab / Window -->
     <div class="section">
         <h2>New Tab & Window</h2>
         <button onclick="openNewTab()">Open New Tab</button>
         <button onclick="openNewWindow()">Open New Window</button>
-        <h2>Delayed Dropdown on Click</h2>
-        <button id="delayedDropdownBtn">Click Me ▼</button>
-        <div id="delayedDropdownMenu" style="display:none; margin-top:5px;">
-            <button onclick="alert('Option 1 selected')">Option 1</button>
-            <button onclick="alert('Option 2 selected')">Option 2</button>
-            <button onclick="alert('Option 3 selected')">Option 3</button>
-        </div>
-        <p id="dropdownTimerText" style="color:red; font-style:italic;"></p>
     </div>
 
-    <!-- Double Click Button-->
+    <!-- Double Click & Delayed Enable -->
     <div class="section" style="display:flex; gap:30px; flex-wrap:wrap; align-items:flex-start;">
+        <div>
             <h2>Double Click Button</h2>
             <button id="doubleClickBtn">Double Click Me</button>
             <p id="doubleClickMsg" style="color:green; font-weight:bold;"></p>
-    </div>
-    <!--  Delayed Enable Button -->
-    <div class="section" style="display:flex; gap:30px; flex-wrap:wrap; align-items:flex-start;">
+        </div>
+        <div>
             <h2>Enable Button After Delay</h2>
             <button id="checkThisBtn">Check This</button>
             <button id="specialActionBtn" disabled>Special Action</button>
             <p id="delayMsg" style="color:blue; font-style:italic;"></p>
-    </div>
-    <div class="section" style="display:flex; gap:30px; flex-wrap:wrap; align-items:flex-start;">
+        </div>
+        <div>
             <h2>Try It Button (Auto Disable)</h2>
             <button id="tryItBtn">Try It</button>
             <p id="tryItMsg" style="color:blue; font-weight:bold;"></p>
+        </div>
     </div>
 
-    <div class="section" style="display:flex; gap:30px; flex-wrap:wrap; align-items:flex-start;">
-            <h2>Programming Languages Dropdown</h2>
-            <button onclick="showDropdown()">Delayed Dropdown</button>
-            <select id="progSelect" style="margin-top:10px;">
-                <option value="">--Select--</option>
-            </select>
+    <!-- Programming Languages Delayed Dropdown -->
+    <div class="section">
+        <h2>Programming Languages Dropdown</h2>
+        <button onclick="showDropdown()">Delayed Dropdown</button>
+        <select id="progSelect" style="margin-top:10px;">
+            <option value="">--Select--</option>
+        </select>
     </div>
 
     <!-- Useful Links -->
@@ -219,21 +213,30 @@ document.getElementById("actionName").addEventListener("input", function(){
 document.getElementById("enableButtonCheckbox").addEventListener("change", function(){
     document.getElementById("btnCheckboxAction").disabled = !this.checked;
 });
-function login(){const u=document.getElementById("username").value;const p=document.getElementById("password").value;if(!u||!p){alert("Enter username and password");return;}alert("Login Successful!\nUser: "+u+"\nPass: "+p);}
+
+function login(){
+    const u=document.getElementById("username").value;
+    const p=document.getElementById("password").value;
+    if(!u||!p){alert("Enter username and password");return;}
+    alert("Login Successful!\nUser: "+u+"\nPass: "+p);
+}
 function showAlert(){alert("This is a simple alert!");}
 function showConfirm(){alert(confirm("Do you like Selenium?")?"Great!":"Okay!");}
 function showPrompt(){const n=prompt("Enter your name:");alert(n?"Hello "+n:"No name entered");}
 function openNewTab(){window.open("https://www.google.com","_blank");}
 function openNewWindow(){window.open("https://www.bing.com","_blank","width=800,height=600,resizable=yes");}
 function calculateInterest(table){table.querySelectorAll("tbody tr").forEach(r=>{const p=parseFloat(r.querySelector(".principal").value)||0;const rate=parseFloat(r.querySelector(".rate").value)||0;const t=parseFloat(r.querySelector(".time").value)||0;r.querySelector(".interest").value=((p*rate*t)/100).toFixed(2);});}
-function openSpreadsheetTab(){const table=document.getElementById("spreadsheetTable");const newTab=window.open("","_blank");newTab.document.write("<html><head><title>Spreadsheet</title></head><body>");newTab.document.write("<h2>Spreadsheet Table</h2>");newTab.document.write(table.outerHTML);newTab.document.write("<br><button onclick='calculateInterest(document.getElementById(\"spreadsheetTable\"))'>Calculate Interest</button>");newTab.document.write("<script>function calculateInterest(table){table.querySelectorAll('tbody tr').forEach(r=>{const p=parseFloat(r.querySelector('.principal').value)||0;const rate=parseFloat(r.querySelector('.rate').value)||0;const t=parseFloat(r.querySelector('.time').value)||0;r.querySelector('.interest').value=((p*rate*t)/100).toFixed(2);});}<\/script>");newTab.document.write("</body></html>");newTab.document.close();}
-document.getElementById("delayedDropdownBtn").addEventListener("click", function() {
-    const dropdown = document.getElementById("delayedDropdownMenu");
-    const timerText = document.getElementById("dropdownTimerText");
-    dropdown.style.display = "none";
-    timerText.textContent = "Dropdown options will appear in 1 minutes... ⏳";
-    setTimeout(() => {dropdown.style.display = "block"; timerText.textContent = "Dropdown options are now available!";}, 60000);
-});
+function openSpreadsheetTab(){
+    const table=document.getElementById("spreadsheetTable");
+    const newTab=window.open("","_blank");
+    newTab.document.write("<html><head><title>Spreadsheet</title></head><body>");
+    newTab.document.write("<h2>Spreadsheet Table</h2>");
+    newTab.document.write(table.outerHTML);
+    newTab.document.write("<br><button onclick='calculateInterest(document.getElementById(\"spreadsheetTable\"))'>Calculate Interest</button>");
+    newTab.document.write("<script>function calculateInterest(table){table.querySelectorAll('tbody tr').forEach(r=>{const p=parseFloat(r.querySelector('.principal').value)||0;const rate=parseFloat(r.querySelector('.rate').value)||0;const t=parseFloat(r.querySelector('.time').value)||0;r.querySelector('.interest').value=((p*rate*t)/100).toFixed(2);});}<\/script>");
+    newTab.document.write("</body></html>");
+    newTab.document.close();
+}
 
 // Double Click Button
 document.getElementById("doubleClickBtn").addEventListener("dblclick", function() {
@@ -258,25 +261,20 @@ document.getElementById("tryItBtn").addEventListener("click", function() {
     const btn = this;
     const msg = document.getElementById("tryItMsg");
     msg.textContent = "Button will disable in 10 seconds...";
-    
-    // Disable after 10 seconds
     setTimeout(() => {
         btn.disabled = true;
         msg.textContent = "Button is disabled for 10 seconds...";
-        
-        // Re-enable after another 10 seconds
         setTimeout(() => {
             btn.disabled = false;
             msg.textContent = "Button is now enabled!";
         }, 10000);
-        
     }, 10000);
 });
 
+// Programming Languages Delayed Dropdown
 function showDropdown() {
     const select = document.getElementById("progSelect");
-    select.innerHTML = '<option value="">Loading options...</option>'; // temporary text
-
+    select.innerHTML = '<option value="">Loading options...</option>';
     setTimeout(() => {
         const options = [
             { value: "python", text: "Python" },
@@ -293,17 +291,7 @@ function showDropdown() {
         });
     }, 3000);
 }
+</script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
