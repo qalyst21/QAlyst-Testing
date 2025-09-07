@@ -246,18 +246,28 @@ document.getElementById("checkThisBtn").addEventListener("click", function() {
     }, 15000);
 });
 
-// Try It Button (10 sec auto disable)
+// Try It Button (disable after 10 sec, re-enable after another 10 sec)
 document.getElementById("tryItBtn").addEventListener("click", function() {
     const btn = this;
     const msg = document.getElementById("tryItMsg");
     msg.textContent = "Button will disable in 10 seconds...";
+    
+    // Disable after 10 seconds
     setTimeout(() => {
         btn.disabled = true;
-        msg.textContent = "Disabled!";
+        msg.textContent = "Button is disabled for 10 seconds...";
+        
+        // Re-enable after another 10 seconds
+        setTimeout(() => {
+            btn.disabled = false;
+            msg.textContent = "Button is now enabled!";
+        }, 10000);
+        
     }, 10000);
 });
 </script>
 
 </body>
 </html>
+
 
