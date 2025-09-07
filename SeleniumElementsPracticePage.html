@@ -271,14 +271,21 @@ document.getElementById("tryItBtn").addEventListener("click", function() {
     }, 10000);
 });
 
-document.getElementById("delayedDropdownBtn").addEventListener("click", function() {
+document.getElementById("delayedProgBtn").addEventListener("click", function() {
     const select = document.getElementById("progSelect");
 
-    // Temporary loading message
-    select.innerHTML = '<option value="">Loading options...</option>';
+    // Clear previous options except the placeholder
+    select.options.length = 1;
 
-    // After 3 seconds, populate options
+    // Show temporary loading text
+    const loadingOption = new Option("Loading options...", "");
+    select.add(loadingOption);
+
+    // Add actual options after 3 seconds
     setTimeout(() => {
+        select.options.length = 0; // remove loading
+        select.add(new Option("--Select--", ""));
+        
         const options = [
             { value: "python", text: "Python" },
             { value: "java", text: "Java" },
@@ -286,15 +293,8 @@ document.getElementById("delayedDropdownBtn").addEventListener("click", function
             { value: "csharp", text: "C#" }
         ];
 
-        // Clear existing options
-        select.options.length = 0;
-
-        // Add default placeholder
-        select.options[0] = new Option("--Select--", "");
-
-        // Add new options one by one
-        options.forEach((opt, index) => {
-            select.options[select.options.length] = new Option(opt.text, opt.value);
+        options.forEach(opt => {
+            select.add(new Option(opt.text, opt.value));
         });
     }, 3000);
 });
@@ -302,5 +302,6 @@ document.getElementById("delayedDropdownBtn").addEventListener("click", function
 
 </body>
 </html>
+
 
 
