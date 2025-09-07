@@ -271,10 +271,10 @@ document.getElementById("tryItBtn").addEventListener("click", function() {
     }, 10000);
 });
 
-// Programming Languages Delayed Dropdown
 function showDropdown() {
     const select = document.getElementById("progSelect");
-    select.innerHTML = '<option value="">Loading options...</option>';
+    select.innerHTML = '<option value="">Loading options...</option>'; // temporary text
+
     setTimeout(() => {
         const options = [
             { value: "python", text: "Python" },
@@ -282,16 +282,17 @@ function showDropdown() {
             { value: "javascript", text: "JavaScript" },
             { value: "csharp", text: "C#" }
         ];
-        select.innerHTML = '<option value="">--Select--</option>'; // reset
+
+        // Reset select with default
+        let html = '<option value="">--Select--</option>';
         options.forEach(opt => {
-            const optionElem = document.createElement("option");
-            optionElem.value = opt.value;
-            optionElem.text = opt.text;
-            select.add(optionElem);
+            html += `<option value="${opt.value}">${opt.text}</option>`;
         });
+        select.innerHTML = html;  // Update all options at once
     }, 3000);
 }
 </script>
 
 </body>
 </html>
+
