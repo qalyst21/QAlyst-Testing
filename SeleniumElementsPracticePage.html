@@ -190,12 +190,9 @@
             <p id="tryItMsg" style="color:blue; font-weight:bold;"></p>
     </div>
 
-    <div class="section" style="display:flex; gap:30px; flex-wrap:wrap; align-items:flex-start;">
-            <h2>Programming Languages Dropdown</h2>
-            <button onclick="showDropdown()">Delayed Dropdown</button>
-            <select id="progSelect" style="margin-top:10px;">
-                <option value="">--Select--</option>
-            </select>
+    <div class="section">
+        <h2>Open Two Windows</h2>
+        <button id="openTwoWindowsBtn">Open Two Windows</button>
     </div>
 
     <!-- Useful Links -->
@@ -273,27 +270,15 @@ document.getElementById("tryItBtn").addEventListener("click", function() {
     }, 10000);
 });
 
-function showDropdown() {
-    const select = document.getElementById("progSelect");
-    select.innerHTML = '<option value="">Loading options...</option>'; // temporary text
+document.getElementById("openTwoWindowsBtn").addEventListener("click", function() {
+    // Open first window
+    window.open("https://www.google.com", "_blank", "width=600,height=400,resizable=yes");
 
-    setTimeout(() => {
-        const options = [
-            { value: "python", text: "Python" },
-            { value: "java", text: "Java" },
-            { value: "javascript", text: "JavaScript" },
-            { value: "csharp", text: "C#" }
-        ];
-        select.innerHTML = '<option value="">--Select--</option>'; // reset
-        options.forEach(opt => {
-            const optionElem = document.createElement("option");
-            optionElem.value = opt.value;
-            optionElem.text = opt.text;
-            select.add(optionElem);
-        });
-    }, 3000);
-}
+    // Open second window
+    window.open("https://www.bing.com", "_blank", "width=600,height=400,resizable=yes");
+});
 </script>
 </body>
 </html>
+
 
